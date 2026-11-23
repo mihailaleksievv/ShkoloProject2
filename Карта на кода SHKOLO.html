@@ -1,0 +1,310 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Карта на кода SHKOLO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: narrow reading column, sticky filter bar, one table per feature area; rows colour-coded by team role. */
+:root {
+  --bg: #f6f8fc;
+  --panel: #ffffff;
+  --fg: #1b2540;
+  --muted: #5b6785;
+  --line: #dfe5f1;
+  --accent: #2f5fc4;
+  --core: #2f5fc4;
+  --core-bg: #e6eefc;
+  --ui: #0f8a7e;
+  --ui-bg: #def4f1;
+  --json: #b8641a;
+  --json-bg: #fbecdc;
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12151f; --panel: #1a1f2d; --fg: #dfe6f5; --muted: #95a0bb; --line: #2a3246; --accent: #89b4fa;
+    --core: #89b4fa; --core-bg: #22304d; --ui: #5fd3c4; --ui-bg: #173a39; --json: #f0b27a; --json-bg: #3d2c1c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12151f; --panel: #1a1f2d; --fg: #dfe6f5; --muted: #95a0bb; --line: #2a3246; --accent: #89b4fa;
+  --core: #89b4fa; --core-bg: #22304d; --ui: #5fd3c4; --ui-bg: #173a39; --json: #f0b27a; --json-bg: #3d2c1c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1060px; margin: 0 auto; }
+header { padding-block: 40px 24px; display: grid; gap: 14px; }
+h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+.lede { color: var(--muted); margin: 0; max-width: 62ch; }
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin-top: 8px; }
+.step { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 0; flex: 1 1 200px; }
+.step b { display: block; font-family: var(--font-display); font-size: 16px; }
+.step code { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.step.ui { border-top: 3px solid var(--ui); }
+.step.core { border-top: 3px solid var(--core); }
+.step.json { border-top: 3px solid var(--json); }
+.arrow { align-self: center; color: var(--muted); font-size: 20px; }
+.example { color: var(--muted); font-size: 14px; margin: 0; max-width: 75ch; }
+.example code, td code { font-family: var(--font-mono); font-size: 12.5px; }
+
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 12px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; border-bottom: 1px solid var(--line);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.bar input {
+  flex: 1 1 240px; min-width: 0; font: inherit; color: var(--fg); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px;
+}
+.bar input:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  font: 500 13px var(--font-body); border: 1px solid var(--line); background: var(--panel); color: var(--fg);
+  border-radius: 999px; padding: 6px 12px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.count { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+section { margin-top: 28px; }
+h2 { font-family: var(--font-display); font-size: 20px; margin: 0 0 10px; display: flex; gap: 10px; align-items: baseline; }
+h2 small { font: 400 13px var(--font-body); color: var(--muted); }
+.table-scroll { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.feat { width: 34%; }
+td.file code { color: var(--fg); }
+td.where { white-space: nowrap; }
+.method { font-family: var(--font-mono); font-size: 12.5px; color: var(--accent); }
+.line { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 600; border-radius: 4px; padding: 1px 7px; white-space: nowrap; }
+.tag.core { color: var(--core); background: var(--core-bg); }
+.tag.ui { color: var(--ui); background: var(--ui-bg); }
+.tag.json { color: var(--json); background: var(--json-bg); }
+.copy { font: 12px var(--font-body); border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 6px; padding: 2px 7px; cursor: pointer; margin-left: 6px; }
+.copy:hover { color: var(--fg); }
+.empty { color: var(--muted); padding: 24px 0; }
+footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Карта на кода SHKOLO</h1>
+    <p class="lede">Къде в кода се случва всяка функционалност – за подготовката на презентацията. Всяко действие минава през трите роли от заданието в този ред:</p>
+    <div class="flow" aria-label="Пътят на едно действие">
+      <div class="step ui"><b>Конзола</b><code>src/Shkolo/Конзола</code><br>екранът и проверката на входа</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step core"><b>Класове и методи</b><code>src/Shkolo/Класове</code><br>правилата и логиката</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step json"><b>JSON</b><code>src/Shkolo/JSON</code><br>записът в school-data.json</div>
+    </div>
+    <p class="example">Пример: учителят въвежда оценка <code>5,50</code>. <code>InputParsers</code> проверява дали е число → <code>GradeService.AddGrade</code> проверява правата и дали е от 2 до 6 → <code>UnitOfWork.Execute</code> вика <code>JsonDataStore.Save</code>, който записва файла.</p>
+  </header>
+
+  <div class="bar" role="search">
+    <input id="q" type="search" placeholder="Търсене: оценки, филтър, Student, JSON…" aria-label="Търсене във функционалностите">
+    <div class="chips" role="group" aria-label="Роля">
+      <button class="chip" data-role="all" aria-pressed="true">Всички</button>
+      <button class="chip" data-role="core" aria-pressed="false">Класове и методи</button>
+      <button class="chip" data-role="ui" aria-pressed="false">Конзола</button>
+      <button class="chip" data-role="json" aria-pressed="false">JSON</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <main id="sections"></main>
+  <p class="empty" id="empty" hidden>Няма намерени функционалности. Опитайте друга дума.</p>
+
+  <footer>Номерът на реда е спрямо версията в SHKOLO.zip. Пътищата са от папката на проекта; във Visual Studio се отварят от Solution Explorer → src → Shkolo.</footer>
+</div>
+
+<script>
+const S = "src/Shkolo/";
+const M = S + "Класове/Методи/";
+const L = S + "Класове/Логика/";
+const K = S + "Класове/";
+const J = S + "JSON/";
+const C = S + "Конзола/";
+
+const AREAS = [
+  { title: "Вход, роли и пароли", rows: [
+    ["Вход – проверка на име и парола", L + "Security/AuthService.cs", "Login", 32, "core"],
+    ["Изход от профила", L + "Security/AuthService.cs", "Logout", 68, "core"],
+    ["Смяна на парола", L + "Security/AuthService.cs", "ChangePassword", 70, "core"],
+    ["Изисквания към паролата", L + "Security/PasswordPolicy.cs", "Validate", 11, "core"],
+    ["Кой какво има право да прави", L + "Security/AuthorizationService.cs", "RequireRole", 35, "core"],
+    ["Може ли потребителят да вижда даден ученик", L + "Security/AuthorizationService.cs", "RequireCanViewStudent", 99, "core"],
+    ["Екранът за вход – карта, полета, демо акаунти", C + "Screens/LoginScreen.cs", "", null, "ui"],
+  ]},
+  { title: "Ученици, учители, класове, предмети", rows: [
+    ["Класът Student", K + "Student.cs", "", null, "core"],
+    ["Всички ученици", M + "StudentService.cs", "GetAllStudents", 18, "core"],
+    ["Ученици по клас", M + "StudentService.cs", "GetStudentsByClass", 58, "core"],
+    ["Търсене на ученик по име или номер", M + "StudentService.cs", "SearchStudents", 41, "core"],
+    ["Добавяне на ученик", M + "StudentService.cs", "AddStudent", 74, "core"],
+    ["Редакция на ученик", M + "StudentService.cs", "UpdateStudent", 94, "core"],
+    ["Деактивиране и активиране", M + "StudentService.cs", "DeactivateStudent / ReactivateStudent", 111, "core"],
+    ["Търсене на учител", M + "TeacherService.cs", "Search", 43, "core"],
+    ["Добавяне на учител", M + "TeacherService.cs", "Add", 58, "core"],
+    ["Кои класове преподава учителят", M + "TeacherService.cs", "GetTaughtClasses", 117, "core"],
+    ["Създаване на клас", M + "ClassService.cs", "Create", 39, "core"],
+    ["Класен ръководител", M + "ClassService.cs", "AssignClassTeacher", 96, "core"],
+    ["Добавяне и търсене на предмет", M + "SubjectService.cs", "Add / Search", 33, "core"],
+    ["Кой учител какво в кой клас преподава", M + "TeacherAssignmentService.cs", "Assign", 44, "core"],
+    ["Проверка на име и имейл", K + "DomainRules.cs", "IsNameValid / IsEmailValid", 26, "core"],
+  ]},
+  { title: "Оценки и филтриране", rows: [
+    ["Поставяне на оценка", M + "GradeService.cs", "AddGrade", 37, "core"],
+    ["Редакция на оценка", M + "GradeService.cs", "UpdateGrade", 54, "core"],
+    ["Изтриване на оценка", M + "GradeService.cs", "DeleteGrade", 79, "core"],
+    ["Оценки на ученик", M + "GradeService.cs", "GetGradesForStudent", 19, "core"],
+    ["Оценки на ученик по предмет", M + "GradeService.cs", "GetGradesBySubject", 25, "core"],
+    ["Оценки на клас", M + "GradeService.cs", "GetGradesForClass", 29, "core"],
+    ["Филтър на оценките – предмет, вид, срок, от–до дата", M + "GradeService.cs", "Filter", 172, "core"],
+    ["Условията на филтъра", L + "Requests/GradeRequests.cs", "GradeFilter", 13, "core"],
+    ["Само текущата учебна година", M + "GradeService.cs", "InActiveYear", 169, "core"],
+    ["Среден успех на ученик", M + "GradeService.cs", "CalculateAverage", 97, "core"],
+    ["Среден успех по предмет", M + "GradeService.cs", "CalculateSubjectAverage", 105, "core"],
+    ["Изчисляване на средно аритметично", M + "GradeService.cs", "Average", 114, "core"],
+    ["Дали оценката е от 2 до 6", K + "DomainRules.cs", "IsValidGrade", 21, "core"],
+    ["Закръгляне за показване", K + "DomainRules.cs", "RoundForDisplay", 42, "core"],
+    ["Думата за оценката – Отличен, Добър…", K + "DomainRules.cs", "GradeWord", 52, "core"],
+    ["Предложение за срочна оценка от средния успех", M + "TermGradeService.cs", "GetSuggestedValue", 19, "core"],
+    ["Поставяне на срочна оценка", M + "TermGradeService.cs", "SetTermGrade", 36, "core"],
+  ]},
+  { title: "Присъствия", rows: [
+    ["Отбелязване на присъствие или отсъствие", M + "AttendanceService.cs", "RecordAttendance", 19, "core"],
+    ["Извиняване или промяна на статус", M + "AttendanceService.cs", "UpdateAttendanceStatus", 43, "core"],
+    ["Присъствия на ученик – с филтър", M + "AttendanceService.cs", "GetAttendanceForStudent", 86, "core"],
+    ["Присъствия на клас – с филтър", M + "AttendanceService.cs", "GetAttendanceForClass", 92, "core"],
+    ["Условията на филтъра – предмет, срок, дати", L + "Requests/AttendanceRequests.cs", "AttendanceFilter", 10, "core"],
+    ["Брой отсъствия – плочките на таблото", M + "AttendanceService.cs", "GetAttendanceSummary", 104, "core"],
+    ["Карта на присъствията по дни", M + "ReportService.Infographics.cs", "GetStudentAttendanceDays", 34, "core"],
+    ["Пулс на присъствията в училището", M + "ReportService.Infographics.cs", "GetAttendancePulse", 55, "core"],
+  ]},
+  { title: "Часове, разписание, домашни, отзиви", rows: [
+    ["Провеждане на час – тема, отсъстващи и оценки наведнъж", M + "LessonWorkflowService.cs", "RecordLesson", 30, "core"],
+    ["Търсене на часове – клас, предмет, учител, дати", M + "LessonService.cs", "Search", 65, "core"],
+    ["Условията на филтъра за часове", L + "Requests/LessonRequests.cs", "LessonFilter", 8, "core"],
+    ["Отмяна на час", M + "LessonService.cs", "CancelLesson", 135, "core"],
+    ["Седмично разписание на учител", M + "TimetableService.cs", "GetForTeacher", 23, "core"],
+    ["Днешните часове", M + "TimetableService.cs", "GetTodayForCurrentUser", 51, "core"],
+    ["Час в разписанието с проверка за конфликт", M + "TimetableService.cs", "AddEntry", 62, "core"],
+    ["Възлагане на домашна", M + "HomeworkService.cs", "CreateHomework", 31, "core"],
+    ["Предаване на домашна от ученик", M + "HomeworkService.cs", "Submit", 120, "core"],
+    ["Статус на домашната – предадена, закъсняла", M + "HomeworkService.cs", "ComputeStatus", 21, "core"],
+    ["Похвала", M + "FeedbackService.cs", "AddPraise", 17, "core"],
+    ["Забележка", M + "FeedbackService.cs", "AddRemark", 20, "core"],
+    ["Даване на отличие", M + "AchievementService.cs", "Award", 43, "core"],
+    ["Съобщение до клас или училище", M + "AnnouncementService.cs", "Publish", 20, "core"],
+    ["Училищно събитие", M + "SchoolEventService.cs", "Create", 24, "core"],
+    ["Известие до ученик", M + "NotificationService.cs", "NotifyStudent", 88, "core"],
+  ]},
+  { title: "Справки, статистики и табла", rows: [
+    ["Данните на таблото на ученика", M + "ReportService.cs", "GetStudentDashboard", 201, "core"],
+    ["Справка за ученик – среден успех по предмети, отсъствия", M + "ReportService.cs", "GenerateStudentReport", 32, "core"],
+    ["Рисуване на таблото на ученика – плочки, ленти, страници", C + "Workspaces/Learning/StudentDashboardSection.cs", "Render", null, "ui"],
+    ["Лентите „Успех по предмети“", C + "Design/GradeBars.cs", "Render", null, "ui"],
+    ["Тенденция по седмици", M + "ReportService.Infographics.cs", "GetStudentGradeTrend", 80, "core"],
+    ["Справка за клас", M + "ReportService.cs", "GenerateClassReport", 38, "core"],
+    ["Статистики на училището", M + "ReportService.cs", "GetSchoolStatistics", 99, "core"],
+    ["Успех по предмет", M + "ReportService.cs", "GetSubjectPerformance", 105, "core"],
+    ["Таблото на учителя", M + "ReportService.cs", "GetTeacherDashboard", 154, "core"],
+    ["Таблото на администратора", M + "ReportService.cs", "GetAdminDashboard", 136, "core"],
+    ["Ученици, които изискват внимание", M + "ReportService.Infographics.cs", "GetAttentionList", 96, "core"],
+    ["Експорт в CSV за Excel", M + "ExportService.cs", "ExportStudentReport", 20, "core"],
+  ]},
+  { title: "JSON базата данни", rows: [
+    ["Всички данни в един клас", K + "SchoolDatabase.cs", "", null, "core"],
+    ["Четене на JSON файла при старт", J + "JsonDataStore.cs", "Load", 34, "json"],
+    ["Запис в JSON – безопасен, чрез временен файл", J + "JsonDataStore.cs", "Save", 73, "json"],
+    ["Всяка промяна се записва цялата или изобщо не", L + "UnitOfWork.cs", "Execute", 38, "core"],
+    ["Настройки на JSON – кирилица, отстъпи", J + "JsonOptions.cs", "", null, "json"],
+    ["Архиви на базата", J + "BackupManager.cs", "CreateBackup", 30, "json"],
+    ["Проверка дали файлът е цялостен", J + "IntegrityValidator.cs", "Validate", 10, "json"],
+    ["В коя папка е файлът", J + "DataLocation.cs", "Resolve", null, "json"],
+    ["Демо данните при първо стартиране", J + "DemoDataGenerator.cs", "Generate", null, "json"],
+    ["Самата база", J + "Data/school-data.json", "", null, "json"],
+    ["Примерна база за преглед", J + "school-data.example.json", "", null, "json"],
+  ]},
+  { title: "Конзолата и проверките на входа", rows: [
+    ["Стартиране на програмата", S + "Program.cs", "Main", null, "ui"],
+    ["Задължителен текст", C + "Input/InputHelper.cs", "ReadRequiredString", 25, "ui"],
+    ["Текст по желание", C + "Input/InputHelper.cs", "ReadOptionalString", 49, "ui"],
+    ["Цяло число в граници", C + "Input/InputHelper.cs", "ReadInt", 74, "ui"],
+    ["Оценка – 5,50 и 5.50", C + "Input/InputHelper.cs", "ReadDecimal", 93, "ui"],
+    ["Превръщане на текст в число", C + "Input/InputParsers.cs", "TryParseDecimal", 13, "ui"],
+    ["Дата – „днес“, 20.11.2026", C + "Input/InputHelper.cs", "ReadDate", 113, "ui"],
+    ["Превръщане на текст в дата", C + "Input/InputParsers.cs", "TryParseDate", 27, "ui"],
+    ["Имейл", C + "Input/InputHelper.cs", "ReadEmail", 154, "ui"],
+    ["Парола със скриване", C + "Input/InputHelper.cs", "ReadPassword", 205, "ui"],
+    ["Потвърждение да/не", C + "Input/InputHelper.cs", "ReadConfirmation", 202, "ui"],
+    ["Избор на ученик или клас от списък с търсене", C + "Input/EntityPicker.cs", "", null, "ui"],
+    ["Търсене с / – палитрата", C + "Shell/PaletteIndex.cs", "Search", 53, "ui"],
+    ["Менюто вляво, клавишите, разделите", C + "Shell/AppShell.cs", "Run", null, "ui"],
+    ["Началният екран с небето", C + "Screens/StartScreen.cs", "Show", null, "ui"],
+  ]},
+];
+
+const ROLE = { core: "Класове и методи", ui: "Конзола", json: "JSON" };
+const state = { role: "all", q: "" };
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render() {
+  const q = state.q.trim().toLowerCase();
+  let shown = 0;
+  const html = AREAS.map(area => {
+    const rows = area.rows.filter(([feat, file, method, , role]) =>
+      (state.role === "all" || role === state.role) &&
+      (!q || (feat + " " + file + " " + method + " " + area.title).toLowerCase().includes(q)));
+    if (!rows.length) return "";
+    shown += rows.length;
+    const body = rows.map(([feat, file, method, line, role]) => `
+      <tr>
+        <td class="feat">${esc(feat)}</td>
+        <td class="file"><code>${esc(file.replace(S, ""))}</code><button class="copy" data-copy="${esc(file)}" aria-label="Копирай пътя">копирай</button></td>
+        <td class="where">${method ? `<span class="method">${esc(method)}</span>` : ""}${line ? ` <span class="line">ред ${line}</span>` : ""}</td>
+        <td><span class="tag ${role}">${ROLE[role]}</span></td>
+      </tr>`).join("");
+    return `<section><h2>${esc(area.title)} <small>${rows.length}</small></h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Функционалност</th><th>Файл (в src/Shkolo)</th><th>Метод</th><th>Роля</th></tr></thead>
+        <tbody>${body}</tbody></table></div></section>`;
+  }).join("");
+  document.getElementById("sections").innerHTML = html;
+  document.getElementById("empty").hidden = shown > 0;
+  document.getElementById("count").textContent = shown + " функционалности";
+}
+
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value; render(); });
+document.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+  state.role = b.dataset.role;
+  document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+document.getElementById("sections").addEventListener("click", e => {
+  const btn = e.target.closest(".copy");
+  if (!btn) return;
+  const text = btn.dataset.copy;
+  const done = () => { btn.textContent = "копирано"; setTimeout(() => (btn.textContent = "копирай"), 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done, () => { window.getSelection().selectAllChildren(btn.previousElementSibling); });
+  } else {
+    window.getSelection().selectAllChildren(btn.previousElementSibling);
+  }
+});
+render();
+</script>
+
+</body></html>
